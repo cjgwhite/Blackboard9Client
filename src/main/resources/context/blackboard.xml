@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+>
+
+    <context:annotation-config/>
+    
+    <bean class="com.phoundation.blackboard9.client.ClientWrapper">
+        
+        <property name="vendorId" value="${bb9.vendorId}"/>
+        <property name="programId" value="${bb9.programId}"/>
+        <property name="password" value="${bb9.sharedSecret}"/>
+        <property name="sessionLife" value="${bb9.sessionLife}"/>
+
+    </bean>
+    
+    <util:map id="requestProperties">
+        <entry key="REQUEST_TIMEOUT" value="${bb9.requestTimeout}"/>
+        <entry key="CONNECT_TIMEOUT" value="${bb9.connectTimeout}"/>
+    </util:map>
+
+    <bean id="headerHandlerResolver" class="com.phoundation.blackboard9.client.util.HeaderHandlerResolver"/>
+
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.announcements.AnnouncementWSPortType"/>
+        <property name="serviceName" value="Announcement.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Announcement.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Announcement.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.calendar.CalendarWSPortType"/>
+        <property name="serviceName" value="Calendar.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Calendar.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Calendar.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.content.ContentWSPortType"/>
+        <property name="serviceName" value="Content.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Content.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Content.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.context.ContextWSPortType"/>
+        <property name="serviceName" value="Context.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Context.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Context.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.course.CourseWSPortType"/>
+        <property name="serviceName" value="Course.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Course.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Course.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.coursemembership.CourseMembershipWSPortType"/>
+        <property name="serviceName" value="CourseMembership.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/CourseMembership.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/CourseMembership.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.gradebook.GradebookWSPortType"/>
+        <property name="serviceName" value="Gradebook.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Gradebook.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Gradebook.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.notificationdistributoroperations.NotificationDistributorOperationsWSPortType"/>
+        <property name="serviceName" value="Notificationdistributoroperations.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/NotificationDistributorOperations.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/NotificationDistributorOperations.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.user.UserWSPortType"/>
+        <property name="serviceName" value="User.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/User.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/User.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+    
+    <bean class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="handlerResolver" ref="headerHandlerResolver"/>
+        <property name="serviceInterface" value="com.blackboard.util.UtilWSPortType"/>
+        <property name="serviceName" value="Util.WS"/>
+        <property name="wsdlDocumentUrl" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Util.WS?wsdl"/>
+        <property name="endpointAddress" value="${bb9.protocol}://${bb9.host}/webapps/ws/services/Util.WS"/>
+        <property name="customProperties" ref="requestProperties"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+    </bean>
+
+
+
+
+    
+</beans>
