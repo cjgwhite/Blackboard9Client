@@ -1,7 +1,9 @@
 Blackboard9Client
 =================
 
-Blackboard Learn 9 Client
+Blackboard Learn 9 Client based on JaxWS.
+
+I found that in a multi-threaded and multi-user environment the Blackboard provided axis based client causes significant service problems due to an issue with the version of RAMPART that it required. To overcome these issues I developed this JaxWS based client.
 
 To build you will need to have an accessible Blackboard 9 service. Modify the POM properties...
 
