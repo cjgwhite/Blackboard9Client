@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.soap.SOAPFault;
-import javax.xml.ws.soap.SOAPFaultException;
+import org.springframework.remoting.jaxws.JaxWsSoapFaultException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.phoundation.blackboard9.client.exception.BlackboardTimeOutException;
@@ -72,8 +72,8 @@ public class ClientServiceProxy implements java.lang.reflect.InvocationHandler {
                 thrown = new Exception(objClass.getCanonicalName() + "." + m.getName() + " : failed", e);
 
                 while (e != null) {
-                    if (e instanceof SOAPFaultException) {
-                        handleSOAPFault((SOAPFaultException) e);
+                    if (e instanceof JaxWsSoapFaultException) {
+                        handleSOAPFault((JaxWsSoapFaultException) e);
                         break;
                     }
 
@@ -99,7 +99,7 @@ public class ClientServiceProxy implements java.lang.reflect.InvocationHandler {
         "WSFW008", "WSFW009", "WSFW011", "WSFW013", "WSFW014", "WSFW015",};
     Pattern faultPattern = Pattern.compile("\\[(.*)\\](.*)");
 
-    private void handleSOAPFault(SOAPFaultException ex) throws Exception {
+    private void handleSOAPFault(JaxWsSoapFaultException ex) throws Exception {
         SOAPFault fault = ex.getFault();
         String faultString = fault.getFaultString();
         log.error(faultString, ex);
